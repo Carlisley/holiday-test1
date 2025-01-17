@@ -32,7 +32,8 @@ dst = cv.drawContours(dst, contours, -1, 255, cv.FILLED)
 #将其与掩模相减
 res = cv.absdiff(dst,mask_bule)
 res = cv.GaussianBlur(res,(5,5),0)
-res = cv.morphologyEx(res, cv.MORPH_CLOSE, np.ones((5,5),np.uint8))
+kernel = np.ones((3, 3), np.uint8)
+res = cv.morphologyEx(res, cv.MORPH_CLOSE, kernel)
 
 num = cv.bitwise_and(img, img, mask=res)
 

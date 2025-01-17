@@ -17,6 +17,7 @@ upper_blue = np.array([140, 255, 255])
 
 #初步处理
 img = cv.imread('1.jpg')
+gray1 = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
 mask_bule = cv.inRange(hsv,lower_blue,upper_blue)
 bule_region = cv.bitwise_and(img,img,mask=mask_bule)
@@ -35,7 +36,7 @@ res = cv.GaussianBlur(res,(5,5),0)
 kernel = np.ones((3, 3), np.uint8)
 res = cv.morphologyEx(res, cv.MORPH_CLOSE, kernel)
 
-num = cv.bitwise_and(img, img, mask=res)
+num = cv.bitwise_and(gray1, gray1, mask=res)
 
 cv.imshow('dst', dst)
 cv.imshow('res', dst)
